@@ -1,8 +1,11 @@
-# docx 파일을 텍스트로 불러오는 역할
+from dotenv import load_dotenv
 from langchain_community.document_loaders import Docx2txtLoader
-
-# 불러오는 l length 의 텍스트 기반 리스트를 잘라주는 역할
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_openai import OpenAIEmbeddings
+from langchain_chroma import Chroma
+from langchain_openai import ChatOpenAI
+
+load_dotenv()
 
 text_splitter = RecursiveCharacterTextSplitter(
 
@@ -25,19 +28,10 @@ document_list = loader.load_and_split(text_splitter=text_splitter)
 # 이걸 쪼개야 하는데, 여기서 text-splitter 가 필요하다.
 # pip install -qU langchain-text-splitters
 
-from dotenv import load_dotenv
-
-# 쪼갠 문서를 임베딩한다.
-from langchain_openai import OpenAIEmbeddings
-
-load_dotenv()
-
 embedding = OpenAIEmbeddings(model='text-embedding-3-large')
 
 # 벡터 데이터베이스인 Chroma 를 사용한다.
 # %pip install langchain-chroma
-
-from langchain_chroma import Chroma
 
 # 위에서 쪼개놓은 문서를 기반으로 백터 데이터베이스에 저장한다.
 database = Chroma.from_documents(
@@ -60,9 +54,6 @@ query = '연봉 5천만원인 직장인의 소득세는 얼마인가요?'
 # 백터 DB 에서 유사도 검색을 한다.
 # 위에 넣었던 임베딩을 활용해서 알아서 답변을 가져온다.
 retrieved_docs = database.similarity_search(query)
-
-# 문서를 가져왔으니, 이제 LLM 에 질의를 해야 한다.
-from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(model='gpt-4o')
 
