@@ -4,3 +4,5 @@ langchain-chroma
 holoviews~=1.19.0
 Flask~=3.0.3
 docx2txt
+
+streamlit
