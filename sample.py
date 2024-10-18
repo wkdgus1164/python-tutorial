@@ -72,3 +72,5 @@ def calculate(query: str = '연봉 5천만원인 직장인의 소득세는 얼�
     ai_message = llm.invoke(promt)
 
     return ai_message.content
+
+print(calculate())

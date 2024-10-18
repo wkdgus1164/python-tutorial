@@ -9,9 +9,8 @@ app = Flask(__name__)
 @app.route("/", methods=['POST'])
 def hello_world():
     query = request.args.get('query', type=str)
-    print(query)
-    print(type(query))
     result = calculate(query)
+
     return jsonify(result)
 
 

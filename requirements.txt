@@ -1,6 +1,6 @@
-docx2txt
-langchain-community
-langchain-openai
+python-dotenv~=0.21.0
+langchain-openai~=0.2.3
 langchain-chroma
-holoviews
+holoviews~=1.19.0
 Flask~=3.0.3
+docx2txt
