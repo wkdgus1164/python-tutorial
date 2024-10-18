@@ -2,4 +2,5 @@ docx2txt
 langchain-community
 langchain-openai
 langchain-chroma
+holoviews
 Flask~=3.0.3
